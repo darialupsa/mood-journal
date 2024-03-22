@@ -1,0 +1,37 @@
+<div class="d-flex flex-column w-100 h-100">
+  <div class="d-flex w-100 h-100 login-flex">
+    <div
+      class="d-flex justify-content-center align-items-center flex-grow-1 loginComponent position-relative"
+    >
+      <ng-container [ngSwitch]="state">
+        <ng-container *ngSwitchCase="LOGIN_STATES.LOGIN">
+          <app-login
+            [username]="username"
+            (goToState)="changeState($event)"
+          ></app-login>
+        </ng-container>
+        <ng-container *ngSwitchCase="LOGIN_STATES.REGISTER">
+          <app-register (goToState)="changeState($event)"></app-register>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- <div class="separator m-4"></div> -->
+    <div
+      class="d-flex flex-column justify-content-center flex-grow-1 rightComponent h-100"
+    >
+      <div class="d-flex flex-column position-relative">
+        <div style="padding: 0px 120px 0px 60px" class="estompare-margine">
+          <img
+            class="rounded-3 mb-4"
+            width="100%"
+            src="/assets/icons/login.jpg"
+          />
+          <div class="app_name">
+            <span>Mood Journal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

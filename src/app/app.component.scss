@@ -1,0 +1,4 @@
+@import "src/styles/styles";
+::ng-deep body {
+  background-color: $background-clor;
+}

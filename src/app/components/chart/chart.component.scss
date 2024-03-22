@@ -1,0 +1,80 @@
+@import "src/styles/styles";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.is-loading {
+  position: relative;
+  border: none;
+  height: 3px;
+  width: 176px;
+  align-self: center;
+  padding-bottom: 22px;
+  margin-top: -3px;
+
+  mat-progress-bar {
+    height: 3px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    // border-radius: 50px;
+  }
+}
+
+.rad_icon {
+  position: absolute;
+  top: 24%;
+  left: 10px;
+}
+.good_icon {
+  position: absolute;
+  top: 42%;
+  left: 10px;
+}
+.meh_icon {
+  position: absolute;
+  top: 59%;
+  left: 10px;
+}
+.bad_icon {
+  position: absolute;
+  top: 77%;
+  left: 10px;
+}
+.awful_icon {
+  position: absolute;
+  top: 94%;
+  left: 10px;
+}
+
+.moodOfDay {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+}
+
+.header-item {
+  width: 15px;
+  height: 15px;
+  font-weight: 500;
+  &.day {
+    margin-left: -35px;
+  }
+}
+
+.year {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(26, 77, 100);
+}
+.disabled-icon {
+  color: lightgray;
+}
+.is-loading.abs {
+  position: absolute;
+  top: 66px;
+}

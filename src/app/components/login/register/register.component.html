@@ -1,0 +1,127 @@
+<div class="login-wrapper register">
+  <form
+    [formGroup]="registerForm"
+    id="registerForm"
+    autocomplete="new-password"
+    class="d-flex justify-content-center"
+  >
+    <div class="d-flex flex-column login-container">
+      <div class="logoColor ms-2 mb-3 justify-content-center"></div>
+      <span class="text-center w-100 pb-3 login-title">
+        {{ "Register" }}
+      </span>
+
+      <mat-form-field appearance="outline" class="userInput">
+        <mat-label>{{ "User name" }}</mat-label>
+        <input
+          autocomplete="new-password"
+          name="username"
+          type="email"
+          formControlName="username"
+          matInput
+          required
+          autocomplete="off"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "Password" }}</mat-label>
+        <input
+          autocomplete="new-password"
+          formControlName="password"
+          type="password"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "Confirm Password" }}</mat-label>
+        <input
+          autocomplete="new-password"
+          formControlName="passwordConfirm"
+          type="password"
+          matInput
+          required
+        />
+      </mat-form-field>
+
+      <div *ngIf="!loading && registerForm.invalid" class="errors-wrapper">
+        <!-- UI Validation Error: Invalid password format -->
+        <mat-error
+          @inOutScaleAnimation
+          class="mb-3"
+          *ngIf="registerForm.get('password').errors?.['pattern']"
+        >
+          <span>{{ "Invalid password" }}</span>
+          <ul class="password-errors">
+            <ng-container
+              *ngFor="
+                let item of registerForm.get('password').errors
+                  | keyvalue : originalOrder
+              "
+            >
+              <li
+                *ngIf="item.key.startsWith('AtLeast')"
+                [class.green]="!registerForm.get('password').errors[item.key]"
+              >
+                {{ passwordErrors[item.key] }}
+              </li>
+            </ng-container>
+          </ul>
+        </mat-error>
+        <!-- UI Validation Error: Passwords not matching -->
+        <mat-error
+          @inOutScaleAnimation
+          class="mb-3"
+          *ngIf="registerForm.errors?.['PasswordsNotMatching']"
+        >
+          {{ "Passwords not matching" }}
+        </mat-error>
+        <!-- Backend exception -->
+        <mat-error
+          class="mb-3"
+          *ngIf="registerForm.touched && registerForm.errors"
+        >
+          <div *ngIf="registerForm.errors['UserAlreadyRegistered']">
+            The user is already registered'
+          </div>
+          <div *ngIf="registerForm.errors['ServerError']">
+            An error occurred while trying to connect to the server
+          </div>
+        </mat-error>
+      </div>
+
+      <mat-progress-bar *ngIf="loading" class="mt-2 mb-3" mode="indeterminate">
+      </mat-progress-bar>
+
+      <div class="d-flex flex-row mt-2">
+        <button
+          type="button"
+          class="w-100 me-3"
+          color="primary"
+          (click)="goTo(LOGIN_STATES.LOGIN)"
+          mat-stroked-button
+        >
+          {{ "Cancel" }}
+        </button>
+        <button
+          class="w-100"
+          (click)="signUp()"
+          type="submit"
+          color="primary"
+          mat-flat-button
+        >
+          {{ "Register" }}
+        </button>
+      </div>
+      <div class="align-self-center mt-3 pt-1">
+        <span>{{ "Already have an account?" }}</span>
+        <a
+          role="button"
+          class="mat-body login-link ms-2"
+          (click)="goTo(LOGIN_STATES.LOGIN)"
+          >{{ "Login" }}</a
+        >
+      </div>
+    </div>
+  </form>
+</div>

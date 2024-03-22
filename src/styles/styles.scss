@@ -1,0 +1,684 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./bootstrap";
+
+$primary-color: #2d8ea0;
+$primary-color-dark: #206d86;
+$primary-color-light: #51b9cd;
+$background-clor: white;
+$login-background-color: white;
+$gray80: #313131;
+$gray60: #3f3f3f;
+$gray50: #585858;
+$gray40: #737373;
+$gray30: #b5b5b5;
+$gray20: #ececec;
+$gray15: #f4f4f4;
+$gray10: #fafafa;
+$invalid-color: #e32323;
+$dark-text: black;
+$success100: #51ae6c;
+$success50: #cbe3d2;
+$success25: #ecf5ef;
+
+$rad: #21c098;
+$good: #96d954;
+$meh: #4894db;
+$bad: #f2b226;
+$awful: #eb0000;
+
+.rad {
+  color: $rad;
+  &.emotion.selected .emotion-icon {
+    --rad-bg-color: #ebfcf7;
+    --rad-color: #119674;
+  }
+  &.emotion-icon:hover {
+    --rad-color: #119674;
+    --rad-bg-color: #dafcf3;
+  }
+
+  :hover {
+    color: #119674;
+  }
+}
+.good {
+  color: $good;
+  &.emotion.selected .emotion-icon {
+    --good-bg-color: #eeffe4;
+    --good-color: #61be04;
+  }
+  &.emotion-icon:hover {
+    --good-color: #61be04;
+    --good-bg-color: #eeffe4;
+  }
+  :hover {
+    color: #61be04;
+  }
+}
+.meh {
+  color: $meh;
+  &.emotion.selected .emotion-icon {
+    --meh-bg-color: #e9f5ff;
+    --meh-color: #07549c;
+  }
+  &.emotion-icon:hover {
+    --meh-color: #07549c;
+    --meh-bg-color: #e9f5ff;
+  }
+  :hover {
+    color: #07549c;
+  }
+}
+.bad {
+  color: $bad;
+  &.emotion.selected .emotion-icon {
+    --bad-bg-color: #fdf2e4;
+    --bad-color: #f88f06;
+  }
+  &.emotion-icon:hover {
+    --bad-color: #f88f06;
+    --bad-bg-color: #fdf2e4;
+  }
+  :hover {
+    color: #f88f06;
+  }
+}
+.awful {
+  color: $awful;
+  &.emotion.selected .emotion-icon {
+    --awful-bg-color: #fdecec;
+    --awful-color: #d30000;
+  }
+  &.emotion-icon:hover {
+    --awful-color: #d30000;
+    --awful-bg-color: #fdecec;
+  }
+  :hover {
+    color: #d30000;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// ---------------------
+// scroll
+// ---------------------
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #64aec523;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64aec5a2;
+}
+
+// ---------------------
+// buttons
+// ---------------------
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: $primary-color;
+}
+
+.mat-stroked-button.mat-primary {
+  color: $primary-color;
+  border: 1px solid $primary-color;
+}
+
+a {
+  color: $primary-color;
+  &:hover {
+    color: $primary-color-dark;
+  }
+}
+
+// ---------------------
+// progress
+// ---------------------
+::ng-deep {
+  .mat-progress-bar-fill::after {
+    background-color: $primary-color;
+  }
+
+  .mat-progress-bar-buffer {
+    background-color: lightblue;
+  }
+}
+
+// ---------------------
+// datepicker
+// ---------------------
+
+//form field- calendar toggle
+.mat-datepicker-toggle,
+.mat-datepicker-toggle-active {
+  color: $gray40 !important;
+}
+.mat-datepicker-toggle {
+  &:hover .mat-icon-button .mat-button-focus-overlay {
+    opacity: 0.05;
+  }
+  .mat-icon-button.cdk-program-focused .mat-button-focus-overlay {
+    opacity: 0;
+  }
+}
+
+//calendar popup
+.mat-calendar {
+  min-height: 300px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+//header
+.mat-calendar-header {
+  .mat-calendar-previous-button:not(.mat-button-disabled),
+  .mat-calendar-next-button:not(.mat-button-disabled) {
+    color: $gray40 !important;
+  }
+}
+
+.mat-calendar-table-header-divider::after {
+  background-color: transparent;
+}
+
+//view title
+.mat-calendar-period-button {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: $gray40;
+}
+
+//change view - button arrow
+.mat-calendar-arrow {
+  fill: $gray40;
+}
+
+//month button hover overlay
+.mat-focus-indicator.cdk-focused .mat-button-focus-overlay,
+.mat-calendar-period-button:hover:not(.mat-button-disabled)
+  .mat-button-focus-overlay {
+  opacity: 0 !important;
+}
+
+//week day
+.mat-calendar-table-header th {
+  font-size: 12px;
+  color: $dark-text;
+}
+
+//day
+.mat-calendar-body-cell {
+  font-size: 14px;
+  color: $dark-text;
+}
+
+// regular date
+.mat-calendar-body-cell-content {
+  color: $dark-text;
+}
+
+// active date - not selected
+.mat-calendar-body-active
+  .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: transparent !important;
+}
+
+// selected date
+.mat-calendar-body-selected {
+  background-color: $primary-color;
+  color: white;
+}
+.mat-calendar-body-disabled > .mat-calendar-body-selected {
+  background-color: $primary-color;
+}
+
+// date hover
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+    .mat-calendar-body-comparison-identical
+  ) {
+  background-color: $gray15 !important;
+}
+
+// //date disabled
+// .mat-calendar-body-disabled
+//   > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+//     .mat-calendar-body-comparison-identical
+//   ) {
+//   color: #c1c1c1;
+//   background-color: transparent;
+// }
+
+// today
+.mat-calendar-body-today.mat-calendar-body-selected {
+  border-color: $primary-color !important;
+  color: white;
+  border: none !important;
+}
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border-color: $primary-color !important;
+}
+
+.mat-calendar-body-label {
+  opacity: 0;
+}
+
+::ng-deep .mat-form-field-suffix {
+  padding-left: 8px;
+  padding-top: 7px !important;
+
+  .mat-icon-button {
+    border-radius: 50%;
+  }
+}
+
+.moodDTP-matFormField {
+  &.mat-form-field.mat-form-field-invalid {
+    ::ng-deep .mat-form-field-flex {
+      .mat-form-field-outline {
+        color: transparent !important;
+        & > div {
+          border-width: 0px !important;
+        }
+      }
+    }
+  }
+}
+
+.moodDTP {
+  .mat-calendar-body-cell:not(.mat-calendar-body-disabled)
+    > .mat-calendar-body-cell-content {
+    font-weight: 500 !important;
+  }
+
+  .rad {
+    .mat-calendar-body-cell-content,
+    .mat-calendar-body-today.mat-calendar-body-selected {
+      color: #000000;
+      background: rgba($rad, 0.2);
+      border: none !important;
+    }
+
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content,
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
+      background: rgba($rad, 0.3) !important;
+    }
+
+    &.mat-calendar-body-active
+      .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+      background-color: rgba($rad, 0.2) !important;
+    }
+  }
+  .good {
+    .mat-calendar-body-cell-content,
+    .mat-calendar-body-today.mat-calendar-body-selected {
+      color: #000000;
+      background: rgba($good, 0.2);
+      border: none !important;
+    }
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content,
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
+      background: rgba($good, 0.3) !important;
+    }
+    &.mat-calendar-body-active
+      .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+      background-color: rgba($good, 0.2) !important;
+    }
+  }
+  .meh {
+    .mat-calendar-body-cell-content,
+    .mat-calendar-body-today.mat-calendar-body-selected {
+      color: #000000;
+      background: rgba($meh, 0.2);
+    }
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content,
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
+      background: rgba($meh, 0.3) !important;
+    }
+    &.mat-calendar-body-active
+      .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+      background-color: rgba($meh, 0.2) !important;
+    }
+  }
+  .bad {
+    .mat-calendar-body-cell-content,
+    .mat-calendar-body-today.mat-calendar-body-selected {
+      color: #000000;
+      background: rgba($bad, 0.2);
+    }
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content,
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
+      background: rgba($bad, 0.3) !important;
+    }
+    &.mat-calendar-body-active
+      .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+      background-color: rgba($bad, 0.2) !important;
+    }
+  }
+  .awful {
+    .mat-calendar-body-cell-content,
+    .mat-calendar-body-today.mat-calendar-body-selected {
+      color: #000000;
+      background: rgba($awful, 0.2);
+    }
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content,
+    &.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
+      background: rgba($awful, 0.3) !important;
+    }
+    &.mat-calendar-body-active
+      .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+      background-color: rgba($awful, 0.2) !important;
+    }
+  }
+
+  .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border: none !important;
+  }
+}
+
+// ---------------------
+// mat-form-field
+// ---------------------
+::ng-deep .mat-form-field,
+.mat-form-field {
+  ::ng-deep .mat-form-field-flex {
+    font-weight: normal;
+    .mat-form-field-outline-thick {
+      border-width: 1px;
+    }
+  }
+
+  ::ng-deep .mat-form-field-label,
+  ::ng-deep .mat-input-element::placeholder {
+    font-weight: normal !important;
+  }
+
+  // work around to avoid clipping the floating label
+  &.mat-form-field-should-float .mat-form-field-label {
+    padding-bottom: 2px;
+  }
+
+  //normal
+  ::ng-deep .mat-form-field-flex {
+    .mat-form-field-outline {
+      color: lightblue !important;
+    }
+    &:hover {
+      .mat-form-field-outline {
+        color: #1da8d5 !important;
+        & > div {
+          border-width: 1px;
+        }
+      }
+    }
+    // label(placeholder) - not float
+    .mat-input-element::placeholder,
+    .mat-form-field-label {
+      color: $gray30;
+    }
+  }
+
+  // label float up
+  &.mat-form-field-can-float.mat-form-field-should-float ::ng-deep {
+    .mat-form-field-label {
+      color: #548daf;
+      transform: translateY(-1.6em) scale(0.9);
+      mat-label {
+        padding-right: 12px;
+        background-color: $background-clor;
+      }
+    }
+    .mat-form-field-required-marker {
+      color: #548daf;
+      margin-left: -12px;
+    }
+  }
+
+  &.mat-form-field-appearance-legacy {
+    &.mat-form-field-can-float.mat-form-field-should-float ::ng-deep {
+      .mat-form-field-label {
+        color: transparent;
+      }
+    }
+  }
+
+  // focused
+  &.mat-focused {
+    ::ng-deep .mat-form-field-flex {
+      .mat-form-field-outline {
+        color: #1da8d5 !important;
+        & > div {
+          border-width: 1px;
+        }
+      }
+    }
+  }
+
+  &.mat-focused .mat-form-field-ripple {
+    background-color: #1da8d5;
+  }
+
+  // invalid
+  &.mat-form-field.mat-form-field-invalid {
+    ::ng-deep .mat-form-field-flex {
+      .mat-form-field-outline {
+        color: $invalid-color !important;
+        & > div {
+          border-width: 1px;
+        }
+      }
+      &:hover {
+        .mat-form-field-outline {
+          color: $invalid-color !important;
+        }
+      }
+      // label(placeholder) - not float
+      .mat-input-element::placeholder,
+      .mat-form-field-label {
+        color: $invalid-color;
+      }
+    }
+    // label float up
+    &.mat-form-field-can-float.mat-form-field-should-float ::ng-deep {
+      .mat-form-field-label,
+      .mat-form-field-required-marker {
+        color: $invalid-color;
+      }
+    }
+  }
+}
+
+.mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #08556e !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: lightblue !important;
+}
+
+.spinner-grow {
+  color: $primary-color;
+}
+
+.spinner-grow-inline {
+  * {
+    visibility: hidden;
+  }
+
+  &:before {
+    width: 2rem;
+    height: 2rem;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -1rem;
+    margin-top: -1rem;
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spinner-grow 0.75s linear infinite;
+  }
+}
+
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+.word-break {
+  white-space: break-spaces;
+  word-break: break-all;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: small;
+  background-color: #ffffff;
+  color: #000000 !important;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  padding: 0.5rem !important;
+}
+
+.error-snackbar {
+  margin-right: 200px !important;
+  background-color: #cae6ef;
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+  .mat-simple-snackbar-action {
+    color: red;
+    .mat-button {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.comment {
+  color: #b7b6b6;
+  font-size: 13px;
+}
+
+.red {
+  color: rgb(67, 137, 170);
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.no-select {
+  user-select: none !important;
+}
+
+.noTextInConsola {
+  color: #b1b1b1;
+}
+
+.fs-500 {
+  font-weight: 500;
+  color: rgb(148, 148, 148);
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.dotdotdot {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.estompare-margine {
+  position: relative;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+      to right,
+      rgba($login-background-color, 1) 0%,
+      rgba($login-background-color, 1) 10%,
+      rgba($login-background-color, 0.8) 20%,
+      rgba($login-background-color, 0.6) 30%,
+      rgba($login-background-color, 0.4) 40%,
+      rgba($login-background-color, 0.2) 50%,
+      rgba(255, 255, 255, 0) 60%
+    );
+
+    background: linear-gradient(
+      to right,
+      rgba($login-background-color, 1) 0%,
+      rgba($login-background-color, 1) 10%,
+      rgba($login-background-color, 0.8) 20%,
+      rgba($login-background-color, 0.6) 30%,
+      rgba($login-background-color, 0.4) 40%,
+      rgba($login-background-color, 0.2) 50%,
+      rgba(255, 255, 255, 0) 60%
+    );
+
+    pointer-events: none;
+  }
+}
+.fw-500 {
+  font-weight: 500;
+}

@@ -1,0 +1,36 @@
+@import "src/styles/styles";
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+img {
+  opacity: 0.3;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.text-wrapper {
+  position: absolute;
+  font-size: 20px;
+  color: black;
+  font-weight: 400;
+  // font-family: cursive;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 100%;
+  span {
+    word-break: break-word;
+    white-space: break-spaces;
+    max-width: 450px;
+    text-align: center;
+    line-height: 1.2;
+    div {
+      font-size: 16px;
+      padding-top: 20px;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,101 @@
+<!-- Toolbar -->
+<div class="toolbar d-flex gap-4 w-100" role="banner">
+  <div
+    class="d-flex flex-row align-items-baseline ps-3 cursor-pointer"
+    (click)="gotoHome()"
+  >
+    <span class="pe-1 m-text">M</span>
+    <span class="o-text">o</span>
+    <span class="oo-text">o</span>
+    <span class="d-text">d </span>
+    <span class="journal-text ps-2">Journal</span>
+  </div>
+
+  <div class="d-flex ms-5">
+    <!-- Home -->
+    <div (click)="goTo('')">
+      <button
+        mat-icon-button
+        class="me-3 button-go"
+        matTooltip="Journal"
+        matTooltipShowDelay="400"
+      >
+        <mat-icon>auto_stories</mat-icon>
+      </button>
+    </div>
+    <!-- Mood -->
+    <div (click)="goTo('home/mood')">
+      <button
+        mat-icon-button
+        class="me-3 button-go"
+        matTooltip="Add a mood"
+        matTooltipShowDelay="400"
+      >
+        <mat-icon>add_reaction</mat-icon>
+      </button>
+    </div>
+
+    <!-- <div class="d-flex justify-content-center align-items-center">
+      <div class="separator ms-2 me-4"></div>
+    </div> -->
+
+    <!-- Chart -->
+    <div (click)="goTo('home/chart-activities-count')" class="ps-5">
+      <button
+        mat-icon-button
+        class="me-3 button-go"
+        matTooltip="Activity trend over time"
+        matTooltipShowDelay="400"
+      >
+        <mat-icon>bar_chart_4_bars</mat-icon>
+      </button>
+    </div>
+    <div (click)="goTo('home/chart-emotion-evolution')">
+      <button
+        mat-icon-button
+        class="me-3 button-go"
+        matTooltip="Emotion evolution"
+        matTooltipShowDelay="400"
+      >
+        <mat-icon>timeline</mat-icon>
+      </button>
+    </div>
+    <div (click)="goTo('home/year-in-pixels')">
+      <button
+        mat-icon-button
+        class="me-3 button-go"
+        matTooltip="Year in pixels"
+        matTooltipShowDelay="400"
+      >
+        <mat-icon>calendar_month</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex flex-grow-1 justify-content-end">
+    <button
+      *ngIf="user"
+      [matMenuTriggerFor]="aboveMenu"
+      class="avatar-menu me-2"
+      mat-button
+    >
+      <span class="user-name align-self-center">
+        Hello, {{ user.username }}
+      </span>
+    </button>
+    <mat-menu
+      #aboveMenu="matMenu"
+      xPosition="before"
+      yPosition="above"
+      class="header-menu"
+    >
+      <button mat-menu-item routerLink="/my-preferences" class="button-menu">
+        <mat-icon>settings</mat-icon>
+        {{ "Settings" }}
+      </button>
+      <button (click)="authService.signOut()" mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        {{ "Log out" }}
+      </button>
+    </mat-menu>
+  </div>
+</div>

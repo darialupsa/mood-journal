@@ -1,0 +1,45 @@
+<div
+  class="at-floating-navigation"
+  [class.at-floating-navigation--active]="toggleObject.toggle"
+>
+  <button
+    class="at-floating-navigation__button"
+    (click)="
+      $event.stopPropagation();
+      $event.stopPropagation();
+      toggleObject.toggle = !toggleObject.toggle
+    "
+    type="button"
+  >
+    ?
+  </button>
+  <nav class="at-floating-navigation__menu">
+    <header class="at-floating-navigation__user d-flex flex-row">
+      <div class="at-floating-navigation__thumbnail w-35">
+        <img alt="BV" src="/assets/icons/me.jpg" />
+      </div>
+      <div class="at-floating-navigation__content w-65">
+        <h2 class="at-floating-navigation__title">Daria Lupsa</h2>
+        <p class="at-floating-navigation__description"></p>
+      </div>
+    </header>
+    <a class="at-floating-navigation__item d-flex flex-row">
+      <span class="w-35 flex-grow-0">University: </span>
+      <span class="w-65 flex-grow-1 fw-normal">
+        Babeș-Bolyai University of Cluj-Napoca (UBB)
+      </span>
+    </a>
+    <a class="at-floating-navigation__item d-flex flex-row">
+      <span class="w-35 flex-grow-0">Year: </span>
+      <span class="w-65 flex-grow-1 fw-normal">III</span>
+    </a>
+    <a class="at-floating-navigation__item d-flex flex-row">
+      <span class="w-35 flex-grow-0">Section: </span>
+      <span class="w-65 flex-grow-1 fw-normal">English</span>
+    </a>
+    <a class="at-floating-navigation__item d-flex flex-row">
+      <span class="w-35 flex-grow-0">E-mail: </span>
+      <span class="w-65 flex-grow-1 fw-normal"> darialupsa@yahoo.com</span>
+    </a>
+  </nav>
+</div>

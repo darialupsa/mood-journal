@@ -1,0 +1,10 @@
+<svg id="following_thumb" data-name="following thumb" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="Ellipse_32" data-name="Ellipse 32" fill="#f8f8f8" stroke="none" stroke-width="">
+    <circle cx="30" cy="30" r="30" stroke="none"/>
+    <circle cx="30" cy="30" r="29" fill="none"/>
+  </g>
+  <g id="Group_80" data-name="Group 80" transform="translate(12.364 10.994)" opacity="0.35">
+    <circle id="Ellipse_43" data-name="Ellipse 43" cx="9.626" cy="9.626" r="9.626" transform="translate(7.821)" fill="#d1d1d1"/>
+    <path id="Path_14" data-name="Path 14" d="M38.072,150a17.447,17.447,0,0,0-17.447,17.447H55.519A17.447,17.447,0,0,0,38.072,150Z" transform="translate(-20.625 -130.165)" fill="#d1d1d1"/>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+@import "src/styles/styles";
+
+:host {
+  width: 100%;
+
+  .login-wrapper {
+    &.register {
+      min-height: 601px;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+    .login-container {
+      width: 350px;
+      display: block;
+      position: relative;
+      padding: 16px;
+    }
+
+    button {
+      height: 42px;
+    }
+
+    input {
+      height: 100%;
+    }
+
+    .mat-error {
+      padding-top: 4px;
+      padding-left: 10px;
+      color: $invalid-color;
+      margin-top: -20px;
+      font-size: 12px;
+      line-height: 1.5;
+      transform-origin: top;
+    }
+
+    a.login-link {
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .line {
+      background-color: var(--gray30);
+      flex-grow: 1;
+      height: 1px;
+    }
+
+    .logoColor {
+      background-size: 250px;
+      background-position-x: 12px;
+    }
+    .login-title {
+      font-size: 30px;
+      color: $primary-color;
+      font-weight: 500;
+      font-family: cursive;
+      margin-bottom: 20px;
+    }
+    .login-subtitle {
+      font-size: 14px;
+      color: black;
+      font-weight: 600;
+    }
+    .login-subtitle-2 {
+      font-size: 14px;
+      color: black;
+      font-weight: 400;
+    }
+
+    .errors-wrapper mat-error:not(:first-child) {
+      display: none;
+    }
+
+    ul.password-errors {
+      li.green {
+        color: black;
+        &:before {
+          content: "✓";
+          position: absolute;
+          left: 42px;
+        }
+        &::marker {
+          color: transparent;
+        }
+      }
+    }
+  }
+}

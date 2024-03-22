@@ -1,0 +1,15 @@
+<div class="d-flex flex-column position-relative w-100">
+  <img
+    @anim2
+    *ngIf="imageIndex !== null"
+    [src]="'/assets/images/pexels-' + imageIndex + '.jpg'"
+  />
+  <div
+    class="d-flex text-wrapper justify-content-center align-items-center w-100"
+  >
+    <span @anim1 *ngIf="quoteIndex !== null"
+      >{{ quotes[quoteIndex].text }}
+      <div class="author">{{ quotes[quoteIndex].author }}</div></span
+    >
+  </div>
+</div>

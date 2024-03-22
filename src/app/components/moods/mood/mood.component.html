@@ -1,0 +1,106 @@
+<form
+  [formGroup]="formGroup"
+  class="d-flex flex-column justify-content-center align-items-center"
+>
+  <ng-container *ngIf="STEP == 1">
+    <div class="arrow-wrapper right" *ngIf="selectedEmotion">
+      <mat-icon class="arrow" (click)="STEP = 2">arrow_forward</mat-icon>
+    </div>
+
+    <span class="pt-5 title">HOW ARE YOU?</span>
+    <mat-form-field class="date-field" appearance="outline" color="primary">
+      <input
+        formControlName="date"
+        name="start"
+        matInput
+        [matDatepicker]="dpDate"
+        (click)="dpDate.open()"
+        readonly="true"
+        [max]="maxDate"
+        (dateChange)="selectMonth(dpDate)"
+      />
+      <mat-datepicker
+        #dpDate
+        disabled="false"
+        [calendarHeaderComponent]="timeHeader"
+      ></mat-datepicker>
+    </mat-form-field>
+    <div class="line d-flex align-self-center"></div>
+    <div class="d-flex flex-row w-100 gap-3 justify-content-center pt-5">
+      <div
+        *ngFor="let emotion of moodJournalService.getEmotions() | async"
+        class="d-flex flex-column justify-content-center emotion {{
+          emotion.name
+        }}"
+        (click)="selectedEmotion = emotion; STEP = 2"
+        [class.selected]="selectedEmotion == emotion"
+      >
+        <mat-icon
+          class="emotion-icon {{ emotion.name }} flex-grow-0 flex-shrink-0"
+          [svgIcon]="emotion.icon"
+        ></mat-icon>
+        <span class="emotion-name {{ emotion.name }}">{{ emotion.name }}</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- STEP 2 -->
+  <ng-container *ngIf="STEP == 2">
+    <div class="arrow-wrapper">
+      <mat-icon class="arrow" (click)="STEP = 1">arrow_back</mat-icon>
+    </div>
+    <div
+      class="d-flex flex-column justify-content-center emotion {{
+        selectedEmotion.name
+      }} pt-4"
+    >
+      <mat-icon
+        class="emotion-icon small {{
+          selectedEmotion.name
+        }} flex-grow-0 flex-shrink-0"
+        [svgIcon]="selectedEmotion.icon"
+      ></mat-icon>
+    </div>
+
+    <span class="pt-3 title">WHAT HAVE YOU BEEN UP TO?</span>
+    <div
+      class="d-flex flex-row w-100 gap-4 justify-content-center mt-5 pt-5 flex-wrap activities"
+    >
+      <div
+        *ngFor="let activity of activities"
+        class="d-flex flex-column justify-content-center activity d-flex"
+        (click)="activity.selected = !activity.selected"
+        [class.selected]="activity.selected"
+      >
+        <div class="activity-icon-wrapper">
+          <mat-icon class="activity-icon">{{ activity.icon }}</mat-icon>
+        </div>
+
+        <span>{{ activity.name }}</span>
+      </div>
+    </div>
+
+    <mat-form-field
+      class="h-auto mb-0 note w-100"
+      appearance="outline"
+      color="primary"
+    >
+      <mat-label>Add Note...</mat-label>
+      <textarea
+        type="text"
+        formControlName="note"
+        matInput
+        name="note"
+        autocomplete="off"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="16"
+      ></textarea>
+    </mat-form-field>
+
+    <div class="arrow-wrapper right">
+      <mat-icon class="arrow" (click)="save()">save</mat-icon>
+    </div>
+  </ng-container>
+</form>

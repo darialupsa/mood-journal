@@ -1,0 +1,16 @@
+@import "src/styles/styles";
+
+:host {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+}
+
+.main-container {
+  overflow: hidden;
+  position: relative;
+  display: block;
+  flex-direction: column;
+  height: calc(100vh - 95px);
+}

@@ -1,0 +1,26 @@
+<div class="moodDTP-wrapper d-flex justify-content-center align-items-center">
+  <mat-form-field
+    class="moodDTP-matFormField"
+    appearance="outline"
+    color="primary"
+  >
+    <input
+      [formControl]="dateFormControl"
+      name="start"
+      matInput
+      [matDatepicker]="datepicker"
+      (click)="datepicker.open()"
+      readonly="true"
+      [min]="minDate"
+      [max]="maxDate"
+      [matDatepickerFilter]="dateFilter"
+    />
+    <mat-datepicker
+      #datepicker
+      disabled="false"
+      panelClass="moodDTP"
+      (viewChanged)="onViewChanged($event)"
+      [dateClass]="dateClass()"
+    ></mat-datepicker>
+  </mat-form-field>
+</div>

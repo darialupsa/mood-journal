@@ -1,0 +1,13 @@
+<div
+  class="d-flex flex-row w-100 h-100 flex-shrink-0 flex-grow-0"
+  (click)="$event.stopPropagation(); toggleObject.toggle = false"
+>
+  <div class="flex-grow-0 flex-shrink-0 d-flex w-50 h-100 left">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="flex-grow-0 flex-shrink-0 d-flex w-50 h-100">
+    <app-motivational-panel></app-motivational-panel>
+  </div>
+</div>
+
+<!-- <app-floating-menu [toggleObject]="toggleObject"></app-floating-menu> -->

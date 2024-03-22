@@ -1,0 +1,41 @@
+@import "src/styles/styles";
+.moodDTP-wrapper {
+  height: 90px;
+  width: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+.moodDTP-matFormField {
+  width: 300px;
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      padding-bottom: 0px !important;
+    }
+    .mat-form-field-flex .mat-form-field-outline,
+    .mat-form-field-flex:hover .mat-form-field-outline {
+      color: transparent !important;
+      border-width: 0px !important;
+    }
+  }
+  &.mat-focused {
+    ::ng-deep .mat-form-field-flex {
+      .mat-form-field-outline {
+        color: transparent !important;
+        & > div {
+          border-width: 0px;
+        }
+      }
+    }
+  }
+
+  input {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: black;
+  }
+}

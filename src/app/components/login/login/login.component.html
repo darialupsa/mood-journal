@@ -1,0 +1,69 @@
+<div class="login-wrapper">
+  <form
+    [formGroup]="loginForm"
+    id="loginForm"
+    autocomplete="new-password"
+    class="d-flex justify-content-center"
+  >
+    <div class="d-flex flex-column login-container">
+      <div class="logoColor ms-2 mb-3 justify-content-center"></div>
+      <span class="text-center w-100 login-title pb-3">
+        {{ "Login" }}
+      </span>
+      <mat-form-field appearance="outline" color="primary" class="userInput">
+        <mat-label>{{ "User name" }}</mat-label>
+        <input
+          autocomplete="off"
+          name="emailInput"
+          type="email"
+          formControlName="username"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "Password" }}</mat-label>
+        <input
+          autocomplete="new-password"
+          name="password"
+          formControlName="password"
+          type="password"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-error
+        class="mb-3"
+        *ngIf="!loading && loginForm.invalid && loginForm?.errors"
+      >
+        <div *ngIf="loginForm.errors['IncorrectUsernameOrPassword']">
+          Incorrect username or password
+        </div>
+        <div *ngIf="loginForm.errors['ServerError']">
+          An error occurred while trying to connect to the server
+        </div>
+      </mat-error>
+
+      <mat-progress-bar *ngIf="loading" class="mb-4" mode="indeterminate">
+      </mat-progress-bar>
+      <button
+        (click)="signIn()"
+        class="w-100"
+        color="primary"
+        type="submit"
+        mat-flat-button
+      >
+        Sign in
+      </button>
+      <div class="align-self-center mt-3 pt-1">
+        <span>Don't have an account?</span>
+        <a
+          role="button"
+          class="mat-body login-link ms-2"
+          (click)="goTo(LOGIN_STATES.REGISTER)"
+          >Register</a
+        >
+      </div>
+    </div>
+  </form>
+</div>

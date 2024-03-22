@@ -20,7 +20,7 @@ export const MoodsPageSize = 40;
   providedIn: 'root',
 })
 export class MoodJournalService {
-  private readonly MoodJournalServiceUrl = `http://localhost:3000`;
+  private readonly MoodJournalServiceUrl = 'https://mood-journal-server-e0032.web.app';  //`http://localhost:3000`;
 
   public emotions: EmotionDTO[];
   public activities: ActivityDTO[];

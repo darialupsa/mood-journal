@@ -69,46 +69,33 @@ export class ChartComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe();
+  // ActivitiesPerDay chart
+  loadActivitiesPerDayData(initChart?) {
+    this.isLoading = true;
+    forkJoin(
+      this.moodJournalService.getChartActivitiesPerDay(
+        this.startDate.format(date_db_format),
+        this.endDate.format(date_db_format)
+      ),
+      this.moodJournalService.getDateRange()
+    ).subscribe(([data, range]) => {
+      this.range = {
+        minDate: moment(range.minDate, date_db_format),
+        maxDate: moment(range.maxDate, date_db_format),
+      };
+      this.isLoading = false;
+      if (data) {
+        if (initChart) {
+          this.initActivitiesPerDayChart(data);
+        } else {
+          this.updateActivitiesPerDayChart(data);
+        }
+      }
+    });
   }
-
-  getPixelColor(month: number, day: number) {
-    const score =
-      this.yearInPixelsData[
-        `${this.year}-${String(month).padStart(2, '0')}-${String(day).padStart(
-          2,
-          '0'
-        )}`
-      ];
-    return score ? EMOTIONS[score].color : '#e4f4f988';
-  }
-
-  initActivitiesPerDayChart() {
+  initActivitiesPerDayChart(data) {
     this.chartOptions = {
       plugins: {
-        // title: {
-        //   display: true,
-        //   text: 'Number of activities / day',
-        //   font: {
-        //     size: 18, // Dimensiunea fontului
-        //     family: 'Arial', // Fontul familiei
-        //     weight: 'normal', // Greutatea fontului (ex: bold, normal)
-        //   },
-        //   color: '#3294a7', // Culoarea textului titlului
-        // },
-        // subtitle: {
-        //   display: true,
-        //   text: `${moment()
-        //     .subtract(1, 'months')
-        //     .format('D MMMM')} - ${moment().format('D MMMM')}`,
-        //   font: {
-        //     size: 12,
-        //     family: 'Arial',
-        //     weight: 'normal',
-        //   },
-        //   padding: { top: 0, bottom: 40 },
-        // },
         legend: {
           display: false,
         },
@@ -131,11 +118,13 @@ export class ChartComponent implements OnInit, OnDestroy {
       {
         type: 'bar',
         data: {
-          labels: [],
+          labels: data.map((row) =>
+            moment(row.date, 'yyyy-MM-DD').format(date_display_shortdate_format)
+          ),
           datasets: [
             {
               label: 'Number of activities',
-              data: [],
+              data: data.map((row) => row.count),
               backgroundColor: '#8ccfdbb8',
             },
           ],
@@ -144,10 +133,21 @@ export class ChartComponent implements OnInit, OnDestroy {
       }
     );
   }
-  loadActivitiesPerDayData(initChart?) {
+  updateActivitiesPerDayChart(data) {
+    this.chart.data.labels = data.map((row) =>
+      moment(row.date, 'yyyy-MM-DD').format(date_display_shortdate_format)
+    );
+    this.chart.data.datasets[0].data = data.map((row) => row.count);
+    setTimeout(() => {
+      this.chart.update();
+    }, 0);
+  }
+
+  // EmotionEvolution chart
+  loadEmotionEvolutionData(initChart?) {
     this.isLoading = true;
     forkJoin(
-      this.moodJournalService.getChartActivitiesPerDay(
+      this.moodJournalService.getChartEmotionEvolution(
         this.startDate.format(date_db_format),
         this.endDate.format(date_db_format)
       ),
@@ -160,28 +160,33 @@ export class ChartComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       if (data) {
         if (initChart) {
-          this.initActivitiesPerDayChart();
+          this.initEmotionEvolutionChart(data);
+        } else {
+          this.updateEmotionEvolutionChart(data);
         }
-
-        this.chart.data.labels = data.map((row) =>
-          moment(row.date, 'yyyy-MM-DD').format(date_display_shortdate_format)
-        );
-        this.chart.data.datasets[0].data = data.map((row) => row.count);
-        setTimeout(() => {
-          this.chart.update();
-        }, 0);
       }
     });
   }
-
-  initEmotionEvolutionChart() {
+  initEmotionEvolutionChart(data) {
     this.chartOptions = {
       scales: {
         x: {
           ticks: {
             display: false,
             autoSkip: false,
-            // callback: () => '',
+            callback: (value: string, index, ticks) => {
+              return index > 0 &&
+                moment(data[index].date, date_db_format).format(
+                  date_display_shortdate_format
+                ) ==
+                  moment(data[index - 1].date, date_db_format).format(
+                    date_display_shortdate_format
+                  )
+                ? ''
+                : moment(data[index].date, date_db_format).format(
+                    date_display_shortdate_format
+                  );
+            },
           },
           grid: {
             display: false,
@@ -223,11 +228,15 @@ export class ChartComponent implements OnInit, OnDestroy {
       {
         type: 'line',
         data: {
-          labels: [],
+          labels: data.map((row) =>
+            moment(row.date, date_db_format).format(
+              date_display_shortdate_format + ' ' + date_time_format
+            )
+          ),
           datasets: [
             {
               label: 'Emotion',
-              data: [],
+              data: data.map((row) => row.score),
               borderColor: '#8ccfdbb8',
               pointStyle: 'circle', // Forma punctelor
               pointBackgroundColor: (context) => {
@@ -247,53 +256,34 @@ export class ChartComponent implements OnInit, OnDestroy {
       }
     );
   }
-  loadEmotionEvolutionData(initChart?) {
-    this.isLoading = true;
-    forkJoin(
-      this.moodJournalService.getChartEmotionEvolution(
-        this.startDate.format(date_db_format),
-        this.endDate.format(date_db_format)
-      ),
-      this.moodJournalService.getDateRange()
-    ).subscribe(([data, range]) => {
-      this.range = {
-        minDate: moment(range.minDate, date_db_format),
-        maxDate: moment(range.maxDate, date_db_format),
-      };
-      this.isLoading = false;
-      if (data) {
-        if (initChart) {
-          this.initEmotionEvolutionChart();
-        }
-        this.chart.data.labels = data.map((row) =>
-          moment(row.date, date_db_format).format(
-            date_display_shortdate_format + ' ' + date_time_format
+  updateEmotionEvolutionChart(data) {
+    this.chart.data.labels = data.map((row) =>
+      moment(row.date, date_db_format).format(
+        date_display_shortdate_format + ' ' + date_time_format
+      )
+    );
+    this.chart.data.datasets[0].data = data.map((row) => row.score);
+    this.chartOptions.scales.x.ticks.callback = (
+      value: string,
+      index,
+      ticks
+    ) => {
+      return index > 0 &&
+        moment(data[index].date, date_db_format).format(
+          date_display_shortdate_format
+        ) ==
+          moment(data[index - 1].date, date_db_format).format(
+            date_display_shortdate_format
           )
-        );
-        this.chart.data.datasets[0].data = data.map((row) => row.score);
-        this.chartOptions.scales.x.ticks.callback = (
-          value: string,
-          index,
-          ticks
-        ) => {
-          return index > 0 &&
-            moment(data[index].date, date_db_format).format(
-              date_display_shortdate_format
-            ) ==
-              moment(data[index - 1].date, date_db_format).format(
-                date_display_shortdate_format
-              )
-            ? ''
-            : moment(data[index].date, date_db_format).format(
-                date_display_shortdate_format
-              );
-        };
-
-        this.chart.update();
-      }
-    });
+        ? ''
+        : moment(data[index].date, date_db_format).format(
+            date_display_shortdate_format
+          );
+    };
+    this.chart.update();
   }
 
+  // YearInPixels
   loadYearInPixelsData() {
     this.isLoading = true;
     forkJoin(
@@ -319,7 +309,6 @@ export class ChartComponent implements OnInit, OnDestroy {
     this.endDate = this.endDate.subtract(value, 'months');
     return true;
   }
-
   getOrCreateTooltip = (chart) => {
     let tooltipEl = chart.canvas.parentNode.querySelector('div');
 
@@ -343,7 +332,6 @@ export class ChartComponent implements OnInit, OnDestroy {
 
     return tooltipEl;
   };
-
   externalTooltipHandler = (context) => {
     const { chart, tooltip } = context;
     let tooltipEl = chart.canvas.parentNode.querySelector('div');
@@ -445,4 +433,18 @@ export class ChartComponent implements OnInit, OnDestroy {
     tooltipEl.style.font = tooltip.options.bodyFont.string;
     tooltipEl.style.padding = '10px ';
   };
+  getPixelColor(month: number, day: number) {
+    const score =
+      this.yearInPixelsData[
+        `${this.year}-${String(month).padStart(2, '0')}-${String(day).padStart(
+          2,
+          '0'
+        )}`
+      ];
+    return score ? EMOTIONS[score].color : '#e4f4f988';
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
 }

@@ -18,7 +18,8 @@
         >
           <mat-icon
             (click)="
-              range?.minDate.isBefore(startDate) &&
+              !isLoading &&
+                range?.minDate.isBefore(startDate) &&
                 updateInterval(1) &&
                 loadActivitiesPerDayData()
             "
@@ -33,7 +34,8 @@
           </div>
           <mat-icon
             (click)="
-              range?.maxDate.isAfter(endDate) &&
+              !isLoading &&
+                range?.maxDate.isAfter(endDate) &&
                 updateInterval(-1) &&
                 loadActivitiesPerDayData()
             "
@@ -58,7 +60,8 @@
       >
         <mat-icon
           (click)="
-            range?.minDate.isBefore(startDate) &&
+            !isLoading &&
+              range?.minDate.isBefore(startDate) &&
               updateInterval(1) &&
               loadEmotionEvolutionData()
           "
@@ -73,7 +76,8 @@
         </div>
         <mat-icon
           (click)="
-            range?.maxDate.isAfter(endDate) &&
+            !isLoading &&
+              range?.maxDate.isAfter(endDate) &&
               updateInterval(-1) &&
               loadEmotionEvolutionData()
           "

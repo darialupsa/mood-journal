@@ -67,6 +67,7 @@ export const DATE_FORMATS3 = {
 };
 
 export const date_db_format = 'yyyy-MM-DD HH:mm:ss';
+export const date_db_short_format = 'yyyy-MM-DD';
 export const date_key_format = 'DD MMMM yyyy';
 export const date_display_shortdate_format = 'D MMMM';
 export const date_time_format = 'HH:mm';

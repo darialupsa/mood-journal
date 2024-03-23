@@ -1,15 +1,93 @@
-<div class="is-loading" [class.abs]="chartType == 'YearInPixels'">
+<div class="is-loading abs">
   <mat-progress-bar mode="indeterminate" role="status" *ngIf="isLoading">
   </mat-progress-bar>
 </div>
-<div style="width: 100%" class="px-5 position-relative">
+<div
+  style="width: 100%"
+  class="px-5 position-relative"
+  [class.padding-50]="chartType == 'EmotionEvolution'"
+>
   <span [ngSwitch]="chartType">
     <ng-container *ngSwitchCase="'ActivitiesPerDay'">
-      <canvas id="chart"></canvas
-    ></ng-container>
+      <div class="d-flex w-100 flex-column gap-2 justify-content-center">
+        <div class="d-flex w-100 justify-content-center title">
+          Number of activities / day
+        </div>
+        <div
+          class="d-flex flex-row gap-3 w-100 mb-3 justify-content-center year mt-2 mb-5"
+        >
+          <mat-icon
+            (click)="
+              range?.minDate.isBefore(startDate) &&
+                updateInterval(1) &&
+                loadActivitiesPerDayData()
+            "
+            [class.opacity-0]="isLoading"
+            [class.disabled-icon]="
+              isLoading || (range && range.minDate.isSameOrAfter(startDate))
+            "
+            >chevron_left</mat-icon
+          >
+          <div class="subtitle">
+            {{ startDate.format("D MMMM") }} - {{ endDate.format("D MMMM") }}
+          </div>
+          <mat-icon
+            (click)="
+              range?.maxDate.isAfter(endDate) &&
+                updateInterval(-1) &&
+                loadActivitiesPerDayData()
+            "
+            [class.opacity-0]="isLoading"
+            [class.disabled-icon]="
+              isLoading || (range && range.maxDate.isSameOrBefore(endDate))
+            "
+            >chevron_right</mat-icon
+          >
+        </div>
+        <div class="d-flex w-100 justify-content-center">
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+    </ng-container>
     <ng-container *ngSwitchCase="'EmotionEvolution'">
-      <canvas id="chart"></canvas>
-      <ng-container *ngIf="!isLoading">
+      <div class="d-flex w-100 justify-content-center title">
+        Emotions evolution
+      </div>
+      <div
+        class="d-flex flex-row gap-3 w-100 mb-3 justify-content-center year mt-2 mb-5"
+      >
+        <mat-icon
+          (click)="
+            range?.minDate.isBefore(startDate) &&
+              updateInterval(1) &&
+              loadEmotionEvolutionData()
+          "
+          [class.opacity-0]="isLoading"
+          [class.disabled-icon]="
+            isLoading || (range && range.minDate.isSameOrAfter(startDate))
+          "
+          >chevron_left</mat-icon
+        >
+        <div class="subtitle">
+          {{ startDate.format("D MMMM") }} - {{ endDate.format("D MMMM") }}
+        </div>
+        <mat-icon
+          (click)="
+            range?.maxDate.isAfter(endDate) &&
+              updateInterval(-1) &&
+              loadEmotionEvolutionData()
+          "
+          [class.opacity-0]="isLoading"
+          [class.disabled-icon]="
+            isLoading || (range && range.maxDate.isSameOrBefore(endDate))
+          "
+          >chevron_right</mat-icon
+        >
+      </div>
+      <div class="d-flex w-100 justify-content-center">
+        <canvas id="chart"></canvas>
+      </div>
+      <ng-container>
         <mat-icon class="rad_icon" [svgIcon]="'rad_icon'"></mat-icon>
         <mat-icon class="good_icon" [svgIcon]="'good_icon'"></mat-icon>
         <mat-icon class="meh_icon" [svgIcon]="'meh_icon'"></mat-icon>
@@ -24,17 +102,21 @@
         >
           <mat-icon
             (click)="
-              range.minYear != year && (year = year - 1) && loadYearData()
+              range?.minDate.year() != year &&
+                (year = year - 1) &&
+                loadYearInPixelsData()
             "
-            [class.disabled-icon]="range && range.minYear === year"
+            [class.disabled-icon]="range && range.minDate.year() === year"
             >chevron_left</mat-icon
           >
           {{ year }}
           <mat-icon
             (click)="
-              range.maxYear != year && (year = year + 1) && loadYearData()
+              range?.maxDate.year() != year &&
+                (year = year + 1) &&
+                loadYearInPixelsData()
             "
-            [class.disabled-icon]="range && range.maxYear === year"
+            [class.disabled-icon]="range && range.maxDate.year() === year"
             >chevron_right</mat-icon
           >
         </div>
@@ -87,8 +169,5 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngSwitchCase="'MonthInPixels'">
-      <app-mood-calendar inline="true"></app-mood-calendar
-    ></ng-container>
   </span>
 </div>

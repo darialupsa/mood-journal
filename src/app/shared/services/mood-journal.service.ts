@@ -10,6 +10,7 @@ import {
   MoodDTO,
   User,
   date_db_format,
+  date_db_short_format,
   date_key_format,
   date_time_format,
 } from '../model/mood-journal.model';
@@ -20,7 +21,7 @@ export const MoodsPageSize = 40;
   providedIn: 'root',
 })
 export class MoodJournalService {
-  private readonly MoodJournalServiceUrl = 'https://mood-journal-server-e0032.web.app';  //`http://localhost:3000`;
+  private readonly MoodJournalServiceUrl = `http://localhost:3000`;
 
   public emotions: EmotionDTO[];
   public activities: ActivityDTO[];
@@ -153,24 +154,49 @@ export class MoodJournalService {
   }
 
   // charts
-  public getChartActivitiesPerDay(): Observable<any[]> {
+  public getChartActivitiesPerDay(
+    startDate?: string,
+    endDate?: string
+  ): Observable<any[]> {
     const authUser = JSON.parse(localStorage.getItem('AuthUser')) as User;
+    startDate =
+      startDate ||
+      moment().subtract(1, 'months').startOf('day').format(date_db_format);
+    endDate = endDate || moment().endOf('day').format(date_db_format);
     return this.http
       .get<any[]>(
-        `${this.MoodJournalServiceUrl}/charts/activitiesPerDay/${authUser.id}`
+        `${this.MoodJournalServiceUrl}/charts/activitiesPerDay/${authUser.id}?startDate=${startDate}&endDate=${endDate}`
       )
       .pipe(
+        tap((dates) => {
+          const allDatesInRange = this.getAllPossibleDates(startDate, endDate);
+          for (const date of allDatesInRange) {
+            const existingData = dates.find((d) => d.date === date);
+            if (!existingData) {
+              dates.push({ date: date, count: 0 });
+            }
+          }
+          dates.sort((a, b) => (a.date > b.date ? 1 : -1));
+          return dates;
+        }),
         catchError(() => {
           this.showErrorMessage('Error getting chart data');
           return of(null);
         })
       );
   }
-  public getChartEmotionEvolution(): Observable<any[]> {
+  public getChartEmotionEvolution(
+    startDate?: string,
+    endDate?: string
+  ): Observable<any[]> {
     const authUser = JSON.parse(localStorage.getItem('AuthUser')) as User;
+    startDate =
+      startDate ||
+      moment().subtract(1, 'months').startOf('day').format(date_db_format);
+    endDate = endDate || moment().endOf('day').format(date_db_format);
     return this.http
       .get<any[]>(
-        `${this.MoodJournalServiceUrl}/charts/emotionEvolution/${authUser.id}`
+        `${this.MoodJournalServiceUrl}/charts/emotionEvolution/${authUser.id}?startDate=${startDate}&endDate=${endDate}`
       )
       .pipe(
         catchError(() => {
@@ -263,5 +289,18 @@ export class MoodJournalService {
     return Object.keys(this.emotionScore).find(
       (key) => this.emotionScore[key] === avg
     );
+  }
+
+  getAllPossibleDates(start: string, end: string): string[] {
+    const allDates: string[] = [];
+    let currentDate = moment(start, date_db_format);
+    const endDate = moment(end, date_db_format);
+
+    // Iterează prin fiecare zi din intervalul specificat și adaugă data în array
+    while (currentDate <= endDate) {
+      allDates.push(currentDate.format('yyyy-MM-DD'));
+      currentDate = currentDate.add(1, 'day');
+    }
+    return allDates;
   }
 }

@@ -20,8 +20,9 @@ import {
 } from 'src/app/shared/services/mood-journal.service';
 import * as moment from 'moment';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialog } from 'src/app/shared/confirmation-dialog/confirmation-dialog';
 
 @Component({
   selector: 'app-moods',
@@ -34,7 +35,8 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 export class MoodsComponent implements OnInit, AfterViewInit {
   constructor(
     private moodJournalService: MoodJournalService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private dialog: MatDialog
   ) {}
 
   @ViewChild('wrapper') wrapperRef: ElementRef;
@@ -178,13 +180,26 @@ export class MoodsComponent implements OnInit, AfterViewInit {
   }
 
   removeMood(group, mood) {
-    this.moodJournalService.removeMood(mood).subscribe((result) => {
-      if (result != 'ERROR') {
-        group.moods.splice(group.moods.indexOf(mood), 1);
-        if (!group.moods.length) {
-          this.groups.splice(this.groups.indexOf(group), 1);
-          delete this.dateMoods[group.date];
-        }
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        message: 'Are you sure you want to delete the selected mood?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No',
+        },
+      },
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.moodJournalService.removeMood(mood).subscribe((result) => {
+          if (result != 'ERROR') {
+            group.moods.splice(group.moods.indexOf(mood), 1);
+            if (!group.moods.length) {
+              this.groups.splice(this.groups.indexOf(group), 1);
+              delete this.dateMoods[group.date];
+            }
+          }
+        });
       }
     });
   }

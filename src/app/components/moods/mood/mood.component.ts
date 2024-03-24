@@ -1,27 +1,10 @@
+import { Component, OnInit } from '@angular/core';
+
 import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { forkJoin } from 'rxjs';
-import { Anim1, Anim2 } from 'src/animations';
-import {
-  ActivityDTO,
-  DATE_FORMATS2,
   DATE_FORMATS3,
-  Mood,
-  User,
   date_db_format,
-  date_key_format,
-  date_time_format,
 } from 'src/app/shared/model/mood-journal.model';
-import {
-  MoodJournalService,
-  MoodsPageSize,
-} from 'src/app/shared/services/mood-journal.service';
+import { MoodJournalService } from 'src/app/shared/services/mood-journal.service';
 import * as moment from 'moment';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -34,7 +17,6 @@ import { MatDatepicker } from '@angular/material/datepicker';
   selector: 'app-mood',
   templateUrl: './mood.component.html',
   styleUrls: ['./mood.component.scss'],
-
   providers: [{ provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS3 }],
 })
 export class MoodComponent implements OnInit {

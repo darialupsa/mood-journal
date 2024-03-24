@@ -236,3 +236,41 @@
   resize: true;
   overflow: scroll;
 }
+
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.5s forwards;
+}
+.slide-in-top {
+  animation: slideInTop 0.5s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(70%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(-70%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    transform: translateY(-40%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

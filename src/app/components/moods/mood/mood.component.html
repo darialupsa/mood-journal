@@ -1,12 +1,13 @@
 <form
   [formGroup]="formGroup"
   class="d-flex flex-column justify-content-center align-items-center"
+  [ngClass]="{
+    'slide-in': STEP == 2,
+    'slide-out': STEP == 11,
+    'slide-in-top': STEP == 1
+  }"
 >
-  <ng-container *ngIf="STEP == 1">
-    <div class="arrow-wrapper right" *ngIf="selectedEmotion">
-      <mat-icon class="arrow" (click)="STEP = 2">arrow_forward</mat-icon>
-    </div>
-
+  <ng-container *ngIf="STEP == 1 || STEP == 11">
     <span class="pt-5 title">HOW ARE YOU?</span>
     <mat-form-field class="date-field" appearance="outline" color="primary">
       <input
@@ -46,9 +47,6 @@
 
   <!-- STEP 2 -->
   <ng-container *ngIf="STEP == 2">
-    <div class="arrow-wrapper">
-      <mat-icon class="arrow" (click)="STEP = 1">arrow_back</mat-icon>
-    </div>
     <div
       class="d-flex flex-column justify-content-center emotion {{
         selectedEmotion.name
@@ -98,13 +96,26 @@
         cdkAutosizeMaxRows="16"
       ></textarea>
     </mat-form-field>
-
-    <div
-      class="arrow-wrapper right"
-      matTooltip="Save mood"
-      matTooltipShowDelay="500"
-    >
-      <mat-icon class="arrow" (click)="save()">save</mat-icon>
-    </div>
   </ng-container>
 </form>
+
+<div
+  class="arrow-wrapper right"
+  *ngIf="selectedEmotion && STEP != 2"
+  (click)="STEP = 2"
+>
+  <mat-icon class="arrow">arrow_forward</mat-icon>
+</div>
+
+<div class="arrow-wrapper" *ngIf="STEP == 2" (click)="STEP = 11">
+  <mat-icon class="arrow">arrow_back</mat-icon>
+</div>
+<div
+  *ngIf="STEP == 2"
+  class="arrow-wrapper right"
+  matTooltip="Save mood"
+  matTooltipShowDelay="500"
+  (click)="save()"
+>
+  <mat-icon class="arrow">save</mat-icon>
+</div>

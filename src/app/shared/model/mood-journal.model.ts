@@ -73,9 +73,9 @@ export const date_display_shortdate_format = 'D MMMM';
 export const date_time_format = 'HH:mm';
 
 export const EMOTIONS = {
-  1: { name: 'awful', color: 'red' },
-  2: { name: 'bad', color: '#f2b226' },
-  3: { name: 'meh', color: '#4894db' },
-  4: { name: 'good', color: '#61be04' },
-  5: { name: 'rad', color: '#119674' },
+  1: { name: 'awful', color: 'red', display: 'Awful' },
+  2: { name: 'bad', color: '#f2b226', display: 'Bad' },
+  3: { name: 'meh', color: '#4894db', display: 'Meh' },
+  4: { name: 'good', color: '#61be04', display: 'Good' },
+  5: { name: 'rad', color: '#119674', display: 'Rad' },
 };

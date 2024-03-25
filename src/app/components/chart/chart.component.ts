@@ -95,6 +95,13 @@ export class ChartComponent implements OnInit, OnDestroy {
   }
   initActivitiesPerDayChart(data) {
     this.chartOptions = {
+      scales: {
+        y: {
+          ticks: {
+            precision: 0,
+          },
+        },
+      },
       plugins: {
         legend: {
           display: false,
@@ -216,10 +223,36 @@ export class ChartComponent implements OnInit, OnDestroy {
           display: false,
         },
         tooltip: {
-          enabled: false,
-          position: 'nearest',
-          titleMarginBottom: 20,
-          external: this.externalTooltipHandler,
+          enabled: true,
+          mode: 'nearest',
+          intersect: true,
+          backgroundColor: '#e7f3f5e3',
+          padding: 20,
+          titleColor: 'black',
+          bodyColor: 'black',
+          displayColors: false,
+          animation: {
+            delay: 300,
+          },
+          titleFont: {
+            size: 14,
+          },
+          bodyFont: {
+            size: 17,
+            weight: 600,
+          },
+          callbacks: {
+            label: function (context) {
+              var emotionValue = context.raw;
+              var emotionName = EMOTIONS[emotionValue].display;
+              return emotionName;
+            },
+            labelTextColor: function (context) {
+              var emotionValue = context.raw;
+              var emotionColor = EMOTIONS[emotionValue].color;
+              return emotionColor;
+            },
+          },
         },
       },
     };

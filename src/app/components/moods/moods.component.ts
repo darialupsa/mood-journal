@@ -23,6 +23,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialog } from 'src/app/shared/confirmation-dialog/confirmation-dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-moods',
@@ -36,7 +37,8 @@ export class MoodsComponent implements OnInit, AfterViewInit {
   constructor(
     private moodJournalService: MoodJournalService,
     private authService: AuthenticationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   @ViewChild('wrapper') wrapperRef: ElementRef;
@@ -177,6 +179,10 @@ export class MoodsComponent implements OnInit, AfterViewInit {
         this.stopFlag = false;
       }, 1000);
     }
+  }
+
+  editMood(mood) {
+    this.router.navigate([`home/mood/${mood.id}`]);
   }
 
   removeMood(group, mood) {

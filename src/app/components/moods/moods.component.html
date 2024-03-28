@@ -32,7 +32,7 @@
         </span>
       </div>
 
-      <div *ngFor="let mood of group.moods" class="mood d-flex px-3 py-2">
+      <div *ngFor="let mood of group.moods" class="mood d-flex ps-3 py-2">
         <mat-icon
           class="emotion-icon {{ mood.emotion.name }} flex-grow-0 flex-shrink-0"
           [svgIcon]="mood.emotion.icon"
@@ -43,7 +43,7 @@
           [disabled]="!mood.note"
         >
           <mat-expansion-panel-header>
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column pe-2">
               <div class="d-flex align-items-center">
                 <span class="name {{ mood.emotion.name }}">{{
                   mood.emotion.name | uppercase
@@ -61,14 +61,12 @@
                     activity.icon
                   }}</mat-icon>
                   <span>{{ activity.name }}</span>
-                  <span *ngIf="!last" class="px-2">⋆</span>
+                  <span *ngIf="!last" class="px-2">•</span>
                 </span>
               </div>
             </div>
             <mat-icon
               class="remove-mood"
-              matTooltip="Remove mood"
-              matTooltipShowDelay="500"
               (click)="
                 $event.preventDefault();
                 $event.stopPropagation();
@@ -76,6 +74,16 @@
               "
               >close</mat-icon
             >
+            <mat-icon
+              class="edit-mood"
+              (click)="
+                $event.preventDefault();
+                $event.stopPropagation();
+                editMood(mood)
+              "
+              fontSet="fas"
+              fontIcon="fa-pencil-alt"
+            ></mat-icon>
           </mat-expansion-panel-header>
 
           <div class="d-flex flex-row">

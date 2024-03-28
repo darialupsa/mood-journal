@@ -122,9 +122,36 @@ export class MoodJournalService {
     );
   }
 
-  public saveMood(mood) {
+  public getMoodById(id): Observable<MoodDTO> {
+    return this.http
+      .get<MoodDTO>(`${this.MoodJournalServiceUrl}/moods/${id}`)
+      .pipe(
+        catchError(() => {
+          this.showErrorMessage('The Mood Journal Server is down');
+          return of(null);
+        })
+      );
+  }
+
+  public addMood(mood) {
     return this.http
       .post<MoodDTO>(`${this.MoodJournalServiceUrl}/moods`, mood)
+      .pipe(
+        tap(() => {
+          this.moods = null;
+          this.range = null;
+          this.pageNumber = 0;
+        }),
+        catchError(() => {
+          this.showErrorMessage('Error saving mood');
+          return of(null);
+        })
+      );
+  }
+
+  public updateMood(mood) {
+    return this.http
+      .put<MoodDTO>(`${this.MoodJournalServiceUrl}/moods/${mood.id}`, mood)
       .pipe(
         tap(() => {
           this.moods = null;

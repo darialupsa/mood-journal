@@ -64,10 +64,15 @@
 
   .mood {
     font-family: cursive;
+    .remove-mood,
+    .edit-mood {
+      transition: opacity 3s ease-out 2s;
+    }
     &:hover {
-      .remove-mood {
+      .remove-mood,
+      .edit-mood {
         opacity: 1;
-        transition: opacity 0.5s ease-out;
+        transition: opacity 0.6s ease-out;
       }
     }
 
@@ -116,14 +121,14 @@
     }
 
     ::ng-deep .mat-expansion-indicator {
-      margin-right: 10px;
-      background: #bbe8ef;
+      background: #86bdc5;
       border-radius: 50%;
       width: 24px;
       height: 24px;
       padding-left: 8px;
       align-self: start;
-      margin-top: 10px;
+      margin-top: 26px;
+      margin-right: -7px;
       &::after {
         border-color: white;
         border-width: 0 2px 2px 0;
@@ -132,20 +137,46 @@
 
     ::ng-deep .mat-expansion-panel-header {
       height: auto !important;
-      padding: 9px 14px;
+      padding: 9px 20px 9px 14px;
       align-items: start;
 
       .remove-mood {
         position: absolute;
-        top: 22px;
-        right: -11px;
-        color: lightblue;
-        font-size: 16px;
+        top: 3px;
+        right: 14px;
+        color: #889ba7;
+        font-size: 15px;
         font-weight: 800;
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
+        background: white;
+        padding: 5px;
+        width: 24px;
+        height: 24px;
+        box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 89%);
         &:hover {
           color: rgb(29, 146, 185);
+          // box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 45%);
+        }
+      }
+      .edit-mood {
+        position: absolute;
+        top: 3px;
+        right: 46px;
+        color: #889ba7;
+        font-size: 13px;
+        font-weight: 800;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        background: white;
+        padding: 6px;
+        width: 24px;
+        height: 24px;
+        box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 89%);
+
+        &:hover {
+          color: rgb(29, 146, 185);
+          // box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 45%);
         }
       }
 

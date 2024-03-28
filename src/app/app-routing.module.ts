@@ -29,6 +29,10 @@ const routes: Routes = [
             component: MoodComponent,
           },
           {
+            path: 'mood/:id',
+            component: MoodComponent,
+          },
+          {
             path: 'chart-activities-count',
             component: ChartComponent,
             data: { chart: 'ActivitiesPerDay' },

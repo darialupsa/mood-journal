@@ -3,9 +3,11 @@
     :root {
       --bad-color: #f2b226; /* Culorea implicită */
       --bad-bg-color:transparent;
+      --bad-border-color:transparent
     }
   </style>
 
+  <circle cx="256" cy="256" r="260" fill="none" stroke="var(--bad-border-color)" stroke-width="10"/>
   <circle cx="256" cy="256" r="256" fill="var(--bad-bg-color)"/>
 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
 

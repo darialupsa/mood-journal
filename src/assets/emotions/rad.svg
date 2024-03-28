@@ -3,9 +3,11 @@
     :root {
       --rad-color: #21c098; /* Culorea implicită */
       --rad-bg-color:transparent;
+      --rad-border-color:transparent
     }
   </style>
 
+    <circle cx="256" cy="256" r="260" fill="none" stroke="var(--rad-border-color)" stroke-width="10"/>
     <circle cx="256" cy="256" r="256" fill="var(--rad-bg-color)"/>
 
   <g id="SVGRepo_bgCarrier" stroke-width="0"/>

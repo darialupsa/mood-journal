@@ -30,12 +30,12 @@ $awful: #eb0000;
 .rad {
   color: $rad;
   &.emotion.selected .emotion-icon {
-    --rad-bg-color: #ebfcf7;
-    --rad-color: #119674;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #119674;
   }
   &.emotion-icon:hover {
-    --rad-color: #119674;
-    --rad-bg-color: #dafcf3;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #119674;
   }
 
   :hover {
@@ -45,13 +45,14 @@ $awful: #eb0000;
 .good {
   color: $good;
   &.emotion.selected .emotion-icon {
-    --good-bg-color: #eeffe4;
-    --good-color: #61be04;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #61be04;
   }
   &.emotion-icon:hover {
-    --good-color: #61be04;
-    --good-bg-color: #eeffe4;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #61be04;
   }
+
   :hover {
     color: #61be04;
   }
@@ -59,13 +60,14 @@ $awful: #eb0000;
 .meh {
   color: $meh;
   &.emotion.selected .emotion-icon {
-    --meh-bg-color: #e9f5ff;
-    --meh-color: #07549c;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #07549c;
   }
   &.emotion-icon:hover {
-    --meh-color: #07549c;
-    --meh-bg-color: #e9f5ff;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #07549c;
   }
+
   :hover {
     color: #07549c;
   }
@@ -73,12 +75,12 @@ $awful: #eb0000;
 .bad {
   color: $bad;
   &.emotion.selected .emotion-icon {
-    --bad-bg-color: #fdf2e4;
-    --bad-color: #f88f06;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #f88f06;
   }
   &.emotion-icon:hover {
-    --bad-color: #f88f06;
-    --bad-bg-color: #fdf2e4;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #f88f06;
   }
   :hover {
     color: #f88f06;
@@ -87,13 +89,14 @@ $awful: #eb0000;
 .awful {
   color: $awful;
   &.emotion.selected .emotion-icon {
-    --awful-bg-color: #fdecec;
-    --awful-color: #d30000;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #d30000;
   }
   &.emotion-icon:hover {
-    --awful-color: #d30000;
-    --awful-bg-color: #fdecec;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #d30000;
   }
+
   :hover {
     color: #d30000;
   }

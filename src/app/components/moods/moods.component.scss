@@ -121,16 +121,15 @@
     }
 
     ::ng-deep .mat-expansion-indicator {
-      background: #86bdc5;
+      // background: #86bdc5;
       border-radius: 50%;
       width: 24px;
       height: 24px;
       padding-left: 8px;
-      align-self: start;
-      margin-top: 26px;
+      align-self: flex-end;
       margin-right: -7px;
       &::after {
-        border-color: white;
+        border-color: #0a8ea9;
         border-width: 0 2px 2px 0;
       }
     }
@@ -150,13 +149,14 @@
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
         background: white;
-        padding: 5px;
-        width: 24px;
-        height: 24px;
-        box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 89%);
+        padding: 6px;
+        width: 26px;
+        height: 26px;
+        box-shadow: 0px 2px 3px 3px rgb(216 230 234 / 75%);
+        border-radius: 50px;
         &:hover {
           color: rgb(29, 146, 185);
-          // box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 45%);
+          box-shadow: 0px 0px 3px 3px rgb(216 230 234 / 75%);
         }
       }
       .edit-mood {
@@ -169,14 +169,15 @@
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
         background: white;
-        padding: 6px;
-        width: 24px;
-        height: 24px;
-        box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 89%);
+        padding: 8px;
+        width: 26px;
+        height: 26px;
+        box-shadow: 0px 2px 3px 3px rgb(216 230 234 / 75%);
+        border-radius: 50px;
 
         &:hover {
           color: rgb(29, 146, 185);
-          // box-shadow: 2px 2px 2px 2px rgb(216 230 234 / 45%);
+          box-shadow: 0px 0px 3px 3px rgb(216 230 234 / 75%);
         }
       }
 

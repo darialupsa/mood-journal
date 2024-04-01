@@ -88,10 +88,6 @@
       yPosition="above"
       class="header-menu"
     >
-      <button mat-menu-item routerLink="/my-preferences" class="button-menu">
-        <mat-icon>settings</mat-icon>
-        {{ "Settings" }}
-      </button>
       <button (click)="authService.signOut()" mat-menu-item>
         <mat-icon>logout</mat-icon>
         {{ "Log out" }}

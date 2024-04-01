@@ -95,6 +95,20 @@ export class MoodJournalService {
           );
   }
 
+  public addActivity(activity) {
+    return this.http
+      .post<ActivityDTO>(`${this.MoodJournalServiceUrl}/activities`, activity)
+      .pipe(
+        tap((act) => {
+          this.activities.push(act);
+        }),
+        catchError(() => {
+          this.showErrorMessage('Error saving activity');
+          return of(null);
+        })
+      );
+  }
+
   // moods
   public getUserRecentMoods(
     userId: number,

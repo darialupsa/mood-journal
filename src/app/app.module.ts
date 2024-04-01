@@ -37,6 +37,7 @@ import { MoodComponent } from './components/moods/mood/mood.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { MoodCalendarComponent } from './components/mood-calendar/mood-calendar.component';
 import { ConfirmationDialog } from './shared/confirmation-dialog/confirmation-dialog';
+import { AddActivityDialogComponent } from './components/moods/add-activity-dialog/add-activity-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ConfirmationDialog } from './shared/confirmation-dialog/confirmation-di
     ChartComponent,
     MoodCalendarComponent,
     ConfirmationDialog,
+    AddActivityDialogComponent,
   ],
   imports: [
     BrowserModule,

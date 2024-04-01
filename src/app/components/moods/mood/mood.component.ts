@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
+  ActivityDTO,
   DATE_FORMATS3,
   MoodDTO,
   date_db_format,
@@ -14,6 +15,8 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { forkJoin, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddActivityDialogComponent } from '../add-activity-dialog/add-activity-dialog.component';
 
 @Component({
   selector: 'app-mood',
@@ -42,7 +45,8 @@ export class MoodComponent implements OnInit {
     public moodJournalService: MoodJournalService,
     public authService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -120,5 +124,25 @@ export class MoodComponent implements OnInit {
   }
   selectMonth(dp: MatDatepicker<any>) {
     dp.close();
+  }
+
+  addActivity() {
+    const dialogRef = this.dialog.open(AddActivityDialogComponent, {
+      width: '400px',
+    });
+    dialogRef.afterClosed().subscribe((activity) => {
+      if (activity) {
+        this.moodJournalService
+          .addActivity({
+            ...activity,
+            userId: this.authService.getAuthUser().id,
+          })
+          .subscribe((result) => {
+            if (result) {
+              this.activities.push({ ...result, selected: false });
+            }
+          });
+      }
+    });
   }
 }

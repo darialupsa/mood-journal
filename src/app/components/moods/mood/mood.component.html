@@ -1,6 +1,6 @@
 <form
   [formGroup]="formGroup"
-  class="d-flex flex-column justify-content-center align-items-center"
+  class="d-flex flex-column justify-content-center align-items-center wrapper"
   [ngClass]="{
     'slide-in': STEP == 2,
     'slide-out': STEP == 11,
@@ -76,6 +76,15 @@
 
         <span>{{ activity.name }}</span>
       </div>
+      <div
+        class="d-flex flex-column justify-content-center activity d-flex add"
+        (click)="addActivity()"
+      >
+        <div class="activity-icon-wrapper">
+          <mat-icon class="activity-icon">add</mat-icon>
+        </div>
+        <span>add/new</span>
+      </div>
     </div>
 
     <mat-form-field
@@ -93,7 +102,7 @@
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
         cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="16"
+        cdkAutosizeMaxRows="10"
       ></textarea>
     </mat-form-field>
   </ng-container>

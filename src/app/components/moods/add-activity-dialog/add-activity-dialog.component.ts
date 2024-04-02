@@ -36,6 +36,8 @@ export class AddActivityDialogComponent implements OnInit, AfterViewInit {
   onSave() {
     if (this.formGroup.valid) {
       this.dialog.close(this.formGroup.value);
+    } else {
+      this.formGroup.markAllAsTouched();
     }
   }
 }

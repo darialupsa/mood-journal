@@ -108,6 +108,24 @@ export class MoodJournalService {
         })
       );
   }
+  public removeActivity(activityId) {
+    return this.http
+      .delete<ActivityDTO>(
+        `${this.MoodJournalServiceUrl}/activities/${activityId}`
+      )
+      .pipe(
+        tap(() => {
+          const idx = this.activities.indexOf((act) => act.id === activityId);
+          this.activities.splice(idx, 1);
+        }),
+        catchError(() => {
+          this.showErrorMessage(
+            'This activity cannot be deleted because it is currently in use.'
+          );
+          return of('ERROR');
+        })
+      );
+  }
 
   // moods
   public getUserRecentMoods(

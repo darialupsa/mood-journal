@@ -69,13 +69,28 @@
         class="d-flex flex-column justify-content-center activity d-flex"
         (click)="activity.selected = !activity.selected"
         [class.selected]="activity.selected"
+        (contextmenu)="
+          $event.preventDefault();
+          $event.stopPropagation();
+          activityToRemove = activity;
+          contextMenuTrigger.openMenu()
+        "
       >
-        <div class="activity-icon-wrapper">
+        <div
+          class="activity-icon-wrapper"
+          #contextMenuTrigger="matMenuTrigger"
+          [matMenuTriggerFor]="myMenu"
+          style="pointer-events: none"
+        >
           <mat-icon class="activity-icon">{{ activity.icon }}</mat-icon>
         </div>
-
         <span>{{ activity.name }}</span>
       </div>
+
+      <mat-menu #myMenu="matMenu">
+        <button mat-menu-item (click)="removeActivity()">Remove</button>
+      </mat-menu>
+
       <div
         class="d-flex flex-column justify-content-center activity d-flex add"
         (click)="addActivity()"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
   ActivityDTO,
@@ -17,6 +17,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { forkJoin, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddActivityDialogComponent } from '../add-activity-dialog/add-activity-dialog.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-mood',
@@ -40,6 +41,7 @@ export class MoodComponent implements OnInit {
   activities: any[] = [];
   emotions;
   moodId = null;
+  activityToRemove;
 
   constructor(
     public moodJournalService: MoodJournalService,
@@ -128,7 +130,7 @@ export class MoodComponent implements OnInit {
 
   addActivity() {
     const dialogRef = this.dialog.open(AddActivityDialogComponent, {
-      width: '400px',
+      width: '350px',
     });
     dialogRef.afterClosed().subscribe((activity) => {
       if (activity) {
@@ -144,5 +146,31 @@ export class MoodComponent implements OnInit {
           });
       }
     });
+  }
+
+  removeActivity() {
+    this.moodJournalService
+      .removeActivity(this.activityToRemove.id)
+      .subscribe((result) => {
+        if (result != 'ERROR') {
+          this.activities.splice(
+            this.activities.indexOf(this.activityToRemove),
+            1
+          );
+        }
+      });
+  }
+
+  handleClick(event: MouseEvent, activity): void {
+    if (event.button === 2) {
+      console.log('Right-click detected');
+      event.preventDefault();
+      event.stopPropagation();
+      this.activityToRemove = activity;
+      //this.contextMenu.openMenu();
+    } else {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   }
 }

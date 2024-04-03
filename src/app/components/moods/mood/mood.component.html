@@ -73,7 +73,8 @@
           $event.preventDefault();
           $event.stopPropagation();
           activityToRemove = activity;
-          contextMenuTrigger.openMenu()
+          openContextMenu($event, contextMenuTrigger);
+          activity.userId && contextMenuTrigger.openMenu()
         "
       >
         <div
@@ -82,7 +83,9 @@
           [matMenuTriggerFor]="myMenu"
           style="pointer-events: none"
         >
-          <mat-icon class="activity-icon">{{ activity.icon }}</mat-icon>
+          <mat-icon class="activity-icon" style="pointer-events: none">{{
+            activity.icon
+          }}</mat-icon>
         </div>
         <span>{{ activity.name }}</span>
       </div>

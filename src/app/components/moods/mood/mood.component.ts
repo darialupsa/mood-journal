@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
 import {
   ActivityDTO,
@@ -161,14 +161,23 @@ export class MoodComponent implements OnInit {
       });
   }
 
-  handleClick(event: MouseEvent, activity): void {
-    if (event.button === 2) {
-      console.log('Right-click detected');
-      event.preventDefault();
-      event.stopPropagation();
-      this.activityToRemove = activity;
-      //this.contextMenu.openMenu();
-    } else {
+  contextMenuVisible = false;
+  ctxMenu;
+
+  openContextMenu(event: MouseEvent, ctxMenu) {
+    this.ctxMenu = ctxMenu;
+    this.contextMenuVisible = true;
+    // Previne afișarea meniului contextual implicit al browserului
+    event.preventDefault();
+  }
+  closeContextMenu() {
+    this.contextMenuVisible = false;
+  }
+  @HostListener('document:mousedown', ['$event'])
+  onDocumentMousedown(event: MouseEvent) {
+    // Închide meniul contextual la clic în afara acestuia
+    if (this.contextMenuVisible && event.button == 2) {
+      this.ctxMenu.closeMenu();
       event.preventDefault();
       event.stopPropagation();
     }

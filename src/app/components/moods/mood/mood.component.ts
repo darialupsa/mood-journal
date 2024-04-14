@@ -42,6 +42,9 @@ export class MoodComponent implements OnInit {
   emotions;
   moodId = null;
   activityToRemove;
+  //2
+
+  //test
 
   constructor(
     public moodJournalService: MoodJournalService,

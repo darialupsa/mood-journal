@@ -133,7 +133,8 @@ export class MoodComponent implements OnInit {
 
   addActivity() {
     const dialogRef = this.dialog.open(AddActivityDialogComponent, {
-      width: '350px',
+      data: { activities: this.activities },
+      width: '300px',
     });
     dialogRef.afterClosed().subscribe((activity) => {
       if (activity) {

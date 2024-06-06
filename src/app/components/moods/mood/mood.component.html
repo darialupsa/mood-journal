@@ -43,6 +43,17 @@
         <span class="emotion-name {{ emotion.name }}">{{ emotion.name }}</span>
       </div>
     </div>
+    <div class="align-self-center mt-5 pt-1 text-center">
+      <div>{{ "Not in a good mood today?" }}</div>
+      <span>{{ "See" }}</span>
+      <a
+        role="button"
+        class="mat-body login-link ms-1 me-1"
+        (click)="viewSuggestion()"
+        >here</a
+      >
+      <span>{{ "what activity you can do" }}</span>
+    </div>
   </ng-container>
 
   <!-- STEP 2 -->

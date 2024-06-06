@@ -18,6 +18,7 @@ import { forkJoin, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddActivityDialogComponent } from '../add-activity-dialog/add-activity-dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { SuggestActivityDialogComponent } from '../suggest-activity-dialog/suggest-activity-dialog.component';
 
 @Component({
   selector: 'app-mood',
@@ -163,6 +164,19 @@ export class MoodComponent implements OnInit {
           );
         }
       });
+  }
+
+  viewSuggestion() {
+    this.moodJournalService.suggestedActivity().subscribe((result) => {
+      if (result?.length) {
+        const activities = this.activities.filter((a) => result.includes(a.id));
+        const dialogRef = this.dialog.open(SuggestActivityDialogComponent, {
+          data: { activities },
+          width: '300px',
+        });
+        dialogRef.afterClosed().subscribe(() => {});
+      }
+    });
   }
 
   contextMenuVisible = false;

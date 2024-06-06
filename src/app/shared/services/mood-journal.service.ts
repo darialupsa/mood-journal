@@ -316,6 +316,21 @@ export class MoodJournalService {
           );
   }
 
+  public suggestedActivity(): Observable<number[]> {
+    const authUser = JSON.parse(localStorage.getItem('AuthUser')) as User;
+
+    return this.http
+      .get<any>(
+        `${this.MoodJournalServiceUrl}/charts/suggestedActivity/${authUser.id}`
+      )
+      .pipe(
+        catchError(() => {
+          this.showErrorMessage('Error getting suggested activity');
+          return of([]);
+        })
+      );
+  }
+
   // utiles
   private transformMoodDtoToMood(moodDto) {
     return {

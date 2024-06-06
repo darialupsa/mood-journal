@@ -1,0 +1,30 @@
+<div mat-dialog-title class="dialog-title align-items-start">
+  <h3>
+    <mat-icon
+      class="emotion-icon good flex-grow-0 flex-shrink-0 me-2"
+      [style.width]="'37px'"
+      [svgIcon]="'good_icon'"
+    ></mat-icon
+    >Be happy!
+  </h3>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div *ngIf="activities?.length; else notActivity">
+  <span
+    >{{ activities.length == 1 ? "Activity" : "Activities" }} that made you feel
+    good most of the time:</span
+  >
+  <ul class="mt-2">
+    <li *ngFor="let activity of activities">{{ activity.name }}</li>
+  </ul>
+</div>
+<ng-container #notActivity> </ng-container>
+
+<mat-dialog-actions align="center" class="pb-4 d-flex justify-content-center">
+  <button mat-raised-button mat-dialog-close tabindex="-1" class="ms-2 mb-1">
+    OK
+  </button>
+</mat-dialog-actions>
